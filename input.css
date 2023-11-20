@@ -1,0 +1,23 @@
+/*sistemo il form*/
+main form{
+    padding-left: 15px;
+}
+
+main form fieldset{
+    margin: 15px 10px 15px 0;
+    border-radius: 8px;
+}
+
+main form fieldset legend{
+    font-weight: bold;
+    font-size: 20px;
+    color:blue;
+}
+
+main form .input-type-text div,
+main form .input-select div,
+main form .input-textarea div{
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-start;
+}
