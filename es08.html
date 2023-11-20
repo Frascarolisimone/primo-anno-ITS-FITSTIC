@@ -1,0 +1,62 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="">
+    <title>Document</title>
+    <style>
+        .prodotto{
+            width: 500px;
+            height: fit-content;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgb(0 0 0 / 20%);
+            margin: 20px;
+            overflow: hidden;
+        }
+        .prodotto h1, .prodotto p{
+            margin: 0;
+            padding: 10px;
+        }
+
+        .prodotto h1{
+            background-color: rgb(180, 178, 95);
+        }
+
+        .prodotto p{
+            background-color: aqua;
+            padding: 0 10px;
+            height: 0px;
+            transition: all 1.0s linear;
+        }
+
+        .prodotto.opened p, .prodotto p.opened {
+            padding: 10px;
+            height: fit-content;
+
+        }
+    </style>
+    <script src="es08.js"></script>
+</head>
+
+
+<body>
+    <div class="prodotto">
+        <h1 onclick="OpenSection(this)"> Mele</h1>
+        <p>Mele campanine provenienti dall'emilia romagna</p>
+    </div>
+    <div class="prodotto">
+        <h1 onclick="OpenSection(this)"> Pizza</h1>
+        <p>Verace pizza napoletana</p>
+    </div>
+    <div class="prodotto">
+        <h1 onclick="OpenSection(this)"> Baguette</h1>
+        <p>Pane tipico dello stato Francia</p>
+    </div>
+    
+    
+
+</body>
+
+
+</html>

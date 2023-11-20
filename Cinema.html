@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!--Metatag compilati da noi - indicazione motori di ricerca-->
+     <meta name="keywords" content="Esercitazione">      
+     <meta name="author" content="Simone Frascaroli">
+     <!--Elementi visibili nella tab-->
+     <title>Cinema</title>
+     <link rel="icon"  href="https://img.icons8.com/sf-regular-filled/256/documentary.png">
+     <!--Richiamo del foglio di css-->
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    
+    </div>
+    <div id="pagina">
+        <header>
+            <h1>CINEMA</h1>
+        </header>
+        <div class="seleziona-luogo">
+            <label>Seleziona un cinema</label>
+            <select id="luogo">
+                <option>Ferrara: CFInema</option>
+                <option>Bologna: Uci Cinema</option>
+                <option>Roma: Uci Cinema</option>
+            </select>
+        </div>
+        <h2>Seleziona posto</h2>
+        <div class="legenda-container">
+            <img class="poltroneLibere" src="IMG/poltronaNera.png" alt="">
+            <p>Libero</p>
+            
+            <img class="poltroneOccupate" src="IMG/poltronaRossa.png" alt="">
+            <p>Occupato</p>
+        </div>
+        
+        <section id="posti">
+            <div >
+                <table id="t" >
+                    <tbody id="tabella">
+
+                    </tbody>
+                </table>
+            </div>
+           
+            <section id="prenotazione">
+                <h1>PRENOTAZIONE</h1>
+                <p>
+                    <label for="txtnfila">Posto fila</label>
+                    <input type="number" id="txtnfila">
+                </p>
+                <p>
+                    <label for="txtnumero">Numero posto</label>
+                    <input type="number" id="txtnumero">
+                </p>
+                <p>
+                    <label for="txtnome">Nome</label>
+                    <input type="text" id="txtnome">
+                </p>
+                <p>
+                    <label for="txtcognome">Cognome</label>
+                    <input type="text" id="txtcognome">
+                </p>
+                <p>
+                    <button onclick="prenota()">Prenota</button>
+                    <button onclick="cancella()">Cancella</button>
+                </p>
+
+            </section>
+            
+        </section>
+        
+        <button onclick="salva()">Salva</button>
+        <button onclick="carica()">Carica</button>
+    </div>
+</body>
+
+<script>
+    var posti = [];
+    const file = 10;
+    const postiPerFila = 15;
+
+    // // molto utile da utilizzare in diverse altre funzioni, inultile in questo punto specifico del codice
+    // let p = {
+    //     fila: "",
+    //     posto: "",
+    //     nome: "",
+    //     cognome: "",
+    //     prenotato: false,
+    // };
+
+    // // molto utile da utilizzare in diverse altre funzioni, inultile in questo punto specifico del codice
+    // let idx = (posto - 1) + (fila - 1) * postiPerFila;
+
+    // // molto utile da utilizzare in diverse altre funzioni, inultile in questo punto specifico del codice
+    // let p = parseInt(posto.value)
+    // let f = fila.value.charCodeAt(0) - 65
+    // // charCodeAt(0) prende il primo carattere di una stringa e lo trasforma nel corrispondente numero ASCII, sottraendo 65 da 'A' si ottiene 1
+
+
+    // // molto utile da utilizzare in diverse altre funzioni, inultile in questo punto specifico del codice
+    // String.fromCharCode(64 + f)
+    // // prendendo il numero progressivo della fila contenuto in f ritorna la corrispondente lettera
+
+    function creaCinema() {
+        for (let fila = 1; fila <= file; fila++) {
+            for (let posto = 1; posto <= postiPerFila; posto++) {
+                let p = {
+                    fila: fila,
+                    posto: posto,
+                    nome: "",
+                    cognome: "",
+                    prenotato: false,
+                };
+                posti.push(p);
+            }
+        }
+    }
+
+    function cancella() {
+      
+
+        generaPosti();
+    }
+
+    function prenota() {
+        fila = txtnfila.value;
+        posto = txtnumero.value;
+        nome = txtnome.value;
+        cognome = txtcognome.value;
+
+        idx = (posto - 1) + (fila - 1) * postiPerFila;
+
+        posti[idx].nome  = nome
+        posti[idx].prenotato  = true
+        posti[idx].fila = fila
+        posti[idx].posto = posto
+        posti[idx].cognome = cognome
+        generaPosti();
+    }
+
+    function generaPosti() {
+        let html = "";
+        for (let fila = 1; fila <= file; fila++) {
+            html += "<tr>"
+            for (let posto = 1; posto <= postiPerFila; posto++) {
+                let idx = (posto - 1) + (fila - 1) * postiPerFila;
+                if(posti[idx].prenotato == false){
+                html += `<td><button onclick= "pulsantePrenota(${fila}, ${posto})" > <img src='IMG/poltronaNera.png'></button></td>`
+                }else{
+                html += `<td><button onclick= "pulsantePrenota(${fila}, ${posto})" > <img src='IMG/poltronaRossa.png'></button></td>`
+                }
+               
+
+                posti[idx] //è un oggetto da modificare
+            }
+        
+
+            html += "</tr>"
+
+        }
+
+        tabella.innerHTML = html;      
+    
+}
+
+
+    function pulsantePrenota(fila, posto) {
+        prenotazione.style.display ="block";
+        let idx = (posto - 1) + (fila - 1) * postiPerFila;
+        //posti[idx]
+        txtnfila.value= fila;
+        txtnumero.value= posto;
+
+    }
+
+    function pulsanteModificaPrenotazione(fila, posto) {
+
+    }
+
+
+    function salva() {
+
+    }
+
+
+    function carica() {
+
+    }
+
+    function PopUp(element){
+        element.classList.toggle("opened");
+        prenotazione.classList.toggle("opened");
+    }
+
+
+    creaCinema();
+    generaPosti();
+   
+
+</script>
+
+</html>
